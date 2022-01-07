@@ -1,0 +1,10 @@
+*.log
+settings.py
+db.sqlite3
+db.sqlite3-journal
+*.pyc
+__pycache__
+.DS_Store
+.env
+
+node_modules
