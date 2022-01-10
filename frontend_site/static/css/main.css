@@ -1,0 +1,13 @@
+#app{
+    color:gold;
+}
+
+#workplace{
+    background-color: rgb(41, 40, 38);
+    height: 100vh;
+}
+
+li.list-group-item {
+    background-color: rgba(0, 0, 0, 0);
+    color: gold;
+}
