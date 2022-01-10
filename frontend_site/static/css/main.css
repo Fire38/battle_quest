@@ -11,3 +11,8 @@ li.list-group-item {
     background-color: rgba(0, 0, 0, 0);
     color: gold;
 }
+
+#navlink{
+    color: gold;
+    font-weight: bold;
+}

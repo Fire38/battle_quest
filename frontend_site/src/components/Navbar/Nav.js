@@ -15,17 +15,17 @@ export const Nav = () => {
                 <div className="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul className="navbar-nav me-auto mb-2 mb-lg-0">
                     <li className="nav-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="games">
+                        <NavLink className="nav-link" to="games" id="navlink">
                             Игры
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="team">
+                        <NavLink className="nav-link" to="team" id="navlink">
                             Команда
                         </NavLink>
                     </li>
                     <li className="nav-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="profile">
+                        <NavLink className="nav-link" to="profile" id="navlink">
                             Профиль
                         </NavLink>
                     </li>

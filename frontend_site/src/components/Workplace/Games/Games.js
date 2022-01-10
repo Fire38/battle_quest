@@ -8,17 +8,17 @@ export const Games = () => {
             <div className="col-2">
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="all-games">
+                        <NavLink className="nav-link font-weight-bold" to="all-games" id="navlink">
                             Все игры
                         </NavLink>
                     </li>
                     <li className="list-group-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="my-games">
+                        <NavLink className="nav-link font-weight-bold" to="my-games" id="navlink">
                             Мои игры
                         </NavLink>
                     </li>
                     <li className="list-group-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="old-games">
+                        <NavLink className="nav-link font-weight-bold" to="old-games" id="navlink">
                             Прошедшие игры
                         </NavLink>
                     </li>

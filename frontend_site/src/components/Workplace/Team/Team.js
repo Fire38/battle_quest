@@ -8,17 +8,17 @@ export const Team = () => {
             <div className="col-2">
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="my-team">
+                        <NavLink className="nav-link font-weight-bold" to="my-team" id="navlink">
                             Моя команда
                         </NavLink>
                     </li>
                     <li className="list-group-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="my-invities">
+                        <NavLink className="nav-link font-weight-bold" to="my-invities" id="navlink">
                             Приглашения
                         </NavLink>
                     </li>
                     <li className="list-group-item">
-                        <NavLink className="nav-link font-weight-bold text-white" to="all-teams">
+                        <NavLink className="nav-link font-weight-bold" to="all-teams" id="navlink">
                             Все команды
                         </NavLink>
                     </li>
