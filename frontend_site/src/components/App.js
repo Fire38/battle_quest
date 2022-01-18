@@ -1,5 +1,5 @@
 import React from 'react';
-import { render } from "react-dom";
+
 
 import { BrowserRouter } from 'react-router-dom';
 
@@ -18,4 +18,4 @@ export const App = () => {
 
 
 
-render(<App/>, document.getElementById('app'));
+//render(<App/>, document.getElementById('app'));

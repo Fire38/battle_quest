@@ -1,8 +1,10 @@
 import React from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 
+import { GamesList } from "./GamesList";
 
-export const Games = () => {
+
+export const GamesPage = () => {
     return (
         <div className="row">
             <div className="col-2">
@@ -26,7 +28,7 @@ export const Games = () => {
             </div>
             <div className="col-10">
                 <Routes>
-                    <Route path="/all-games" element={ <div>Все игры</div> }/>
+                    <Route path="/all-games" element={ <GamesList/> }/>
                     <Route path="/my-games" element={ <div>Мои игры</div> }/>
                     <Route path="/old-games" element={ <div>Прошедшие игры</div> }/>
                 </Routes>
