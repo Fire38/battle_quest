@@ -1,7 +1,9 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import { AuthForm } from "./authForm";
 import  Logo  from "../../../static/img/logo.png"
+
 
 
 export const Nav = () => {
@@ -30,12 +32,7 @@ export const Nav = () => {
                         </NavLink>
                     </li>
                 </ul>
-                <form className="d-flex">
-                    <input className="form-control me-2" type="text" placeholder="Введите логин" aria-label="login"/>
-                    <input className="form-control me-2" type="password" placeholder="Введите пароль" aria-label="password"/>
-                    <button className="btn btn-outline-success" type="submit">Войти</button>
-                    <button className="btn btn-outline-success" type="submit">Зарегистрироваться</button>
-                </form>
+                <AuthForm/>
                 </div>
             </div>
             </nav>

@@ -12,7 +12,9 @@ const loginError = (error) => ({ type: "ERROR", error });
 
 export const registerUser = (userInfo) => async dispatch => {
     try{
-        const res = await axiosInstance.post("/auth/user/create", {
+        console.log('work')
+
+        const res = await axiosInstance.post("/auth/user/create/", {
             username: userInfo.username,
             password: userInfo.password
         });
