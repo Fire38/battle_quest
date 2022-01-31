@@ -1,19 +1,32 @@
 import axiosInstance from "../../axiosApi";
 
 
-const loginUser = (payload) => ({ type: "LOGIN_USER", payload });
+export const loginUser = (payload) => ({ type: "LOGIN_USER", payload });
 
-const logoutUser = () => ({ type: "LOGOUT" });
+export const logoutUser = () => ({ type: "LOGOUT" });
 
-const loginError = (error) => ({ type: "ERROR", error });
+export const loginError = (error) => ({ type: "ERROR", error });
 
 
+export const fetchUser = (userInfo) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/auth/token/obtain/", {
+            username: userInfo.username,
+            password: userInfo.password
+        });
+        axiosInstance.defaults.headers['Authorization'] = 'JWT ' + res.data.access;
+        localStorage.setItem("access_token", res.data.access);
+        localStorage.setItem("refresh_token", res.data.refresh);
+        dispatch(autoLogin());
+        return res
+    }catch(error){
+        dispatch(loginError(error.message));
+    }
+}
 
 
 export const registerUser = (userInfo) => async dispatch => {
     try{
-        console.log('work')
-
         const res = await axiosInstance.post("/auth/user/create/", {
             username: userInfo.username,
             password: userInfo.password
@@ -23,7 +36,7 @@ export const registerUser = (userInfo) => async dispatch => {
                 username: userInfo.username,
                 password: userInfo.password
             });
-            axiosInstance.defaults.headers['Authorization'] = 'JWT' + res.data.access
+            axiosInstance.defaults.headers['Authorization'] = 'JWT ' + res.data.access
             localStorage.setItem("access_token", res.data.access);
             localStorage.setItem("refresh_token", res.data.refresh);
             dispatch(autoLogin())
@@ -42,5 +55,15 @@ export const autoLogin = () => async dispatch => {
         dispatch(loginUser(res.data))
     }catch(error){
         console.log('auloLogin ', error)
+    }
+}
+
+
+export const getUserTeam = () => async dispatch => {
+    try{
+        const res = await axiosInstance.get("/core/get_user_team/")
+        console.log(res.data)
+    }catch(error){
+        console.log("Ошибка получения команды", error)
     }
 }

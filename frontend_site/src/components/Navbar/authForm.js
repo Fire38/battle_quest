@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { registerUser } from "../actions/userActions";
+import { registerUser, fetchUser } from "../actions/userActions";
 
 
 export const AuthForm = () => {
@@ -18,9 +18,14 @@ export const AuthForm = () => {
         });
     }
 
-    const handleSubmit = (event) => {
+    const handleRegister = (event) => {
         event.preventDefault();
         dispatch(registerUser(user));
+    }
+
+    const handleLogin = (event) => {
+        event.preventDefault();
+        dispatch(fetchUser(user));
     }
 
     return(
@@ -39,8 +44,8 @@ export const AuthForm = () => {
                 aria-label="password"
                 name="password"
                 onChange={handleChange}/>
-            <button className="btn btn-outline-success" type="submit">Войти</button>
-            <button className="btn btn-outline-success" type="submit" onClick={handleSubmit}>Зарегистрироваться</button>
+            <button className="btn btn-outline-success" type="submit" onClick={handleLogin}>Войти</button>
+            <button className="btn btn-outline-success" type="submit" onClick={handleRegister}>Зарегистрироваться</button>
         </form>
     )
 

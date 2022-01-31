@@ -18,6 +18,7 @@ export const userReducer = (state=initialState, action) => {
             localStorage.clear()
             return{
                 ...state,
+                loggedIn: false,
                 user: {}
             }
         case "ERROR":

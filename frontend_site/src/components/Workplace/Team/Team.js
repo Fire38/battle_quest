@@ -1,6 +1,8 @@
 import React from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 
+import { TeamList } from "./TeamList";
+
 
 export const Team = () => {
     return (
@@ -28,7 +30,7 @@ export const Team = () => {
                 <Routes>
                     <Route path="/my-team" element={ <div>Моя команда</div> }/>
                     <Route path="/my-invities" element={ <div>Мои приглашения</div> }/>
-                    <Route path="/all-teams" element={ <div>Все команды</div> }/>
+                    <Route path="/all-teams" element={ <TeamList/> }/>
                 </Routes>
             </div>
         </div>

@@ -1,12 +1,24 @@
 import React from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { AuthForm } from "./authForm";
-import  Logo  from "../../../static/img/logo.png"
+import { logoutUser, getUserTeam } from "./../actions/userActions";
+import  Logo  from "../../../static/img/logo.png";
 
 
 
 export const Nav = () => {
+    const user = useSelector(state => state.userReducer)
+    const dispatch = useDispatch();
+
+    const greeting = "Привет, " + user.user.username +"!"
+
+    const handleLogout = () => {
+        dispatch(logoutUser())
+    }
+
+    dispatch(getUserTeam())
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -31,8 +43,24 @@ export const Nav = () => {
                             Профиль
                         </NavLink>
                     </li>
+                    {
+                        user.loggedIn 
+                        ?
+                        <li className="nav-item nav-link" id="navlink" onClick={handleLogout}>
+                            Выйти
+                        </li>
+                        :
+                        ""
+                    }
+
                 </ul>
-                <AuthForm/>
+                { 
+                    user.loggedIn 
+                    ?  
+                    greeting
+                    : 
+                    <AuthForm/>
+                }
                 </div>
             </div>
             </nav>
