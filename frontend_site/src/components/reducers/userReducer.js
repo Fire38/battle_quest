@@ -2,7 +2,8 @@ const initialState = {
     loggedIn: false,
     error: false,
     errorMessage: '',
-    user: {}
+    user: {},
+    invites: {}
 }
 
 
@@ -26,6 +27,17 @@ export const userReducer = (state=initialState, action) => {
                 ...state,
                 error: true,
                 errorMessage: action.payload.error
+            }
+        case "GET_INVITE_LIST_SUCCESS":
+            return{
+                ...state,
+                invites: action.payload
+            }
+        case "GET_INVITE_LIST_ERROR":
+            return{
+                ...state,
+                error: true,
+                errorMessage: action.payload
             }
         default:
             return state

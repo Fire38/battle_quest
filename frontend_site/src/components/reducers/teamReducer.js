@@ -16,6 +16,7 @@ export const teamReducer = (state=initialState, action) => {
                 ...state,
                 errorMessage: action.payload
             }
+        cas
         default:
             return state
     }

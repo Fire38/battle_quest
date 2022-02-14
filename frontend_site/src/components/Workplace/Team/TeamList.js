@@ -14,12 +14,13 @@ export const TeamList = () => {
     }, [])
 
     let teamList = Object.values(teams).map((team) => 
-        <li key={team.id}>{ team.name }</li>
+        <li className="list-group-item" key={team.id}>{ team.name }</li>
     )
     
     return(
         <div>
-            <ul>
+            <h3>Список команд</h3>
+            <ul className="list-group">
                 { teamList }
             </ul>
         </div>

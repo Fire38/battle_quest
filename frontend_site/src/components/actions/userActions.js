@@ -7,6 +7,10 @@ export const logoutUser = () => ({ type: "LOGOUT" });
 
 export const loginError = (error) => ({ type: "ERROR", error });
 
+const getInviteListSuccess = (payload) => ({type: "GET_INVITE_LIST_SUCCESS", payload})
+
+const getInviteListError = (error) => ({type: "GET_INVITE_LIST_ERROR", error})
+
 
 export const fetchUser = (userInfo) => async dispatch => {
     try{
@@ -65,5 +69,26 @@ export const getUserTeam = () => async dispatch => {
         console.log(res.data)
     }catch(error){
         console.log("Ошибка получения команды", error)
+    }
+}
+
+
+export const getInviteList = () => async dispatch => {
+    try{
+        const res = await axiosInstance.get("/core/invites/")
+        dispatch(getInviteListSuccess(res.data))
+    }catch(error){
+        dispatch(getInviteListError(error.message))
+    }
+}
+
+
+export const acceptInvite = (teamId) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/invites/", {
+            teamId: teamId,
+        })
+    }catch(error){
+        console.log(error)
     }
 }

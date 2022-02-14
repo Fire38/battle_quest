@@ -2,6 +2,8 @@ import React from "react";
 import { Routes, Route, NavLink } from "react-router-dom";
 
 import { TeamList } from "./TeamList";
+import { PlayerTeam } from "./PlayerTeam";
+import { PlayerInvites } from "./PlayerInvites";
 
 
 export const Team = () => {
@@ -28,8 +30,8 @@ export const Team = () => {
             </div>
             <div className="col-10">
                 <Routes>
-                    <Route path="/my-team" element={ <div>Моя команда</div> }/>
-                    <Route path="/my-invities" element={ <div>Мои приглашения</div> }/>
+                    <Route path="/my-team" element={ <PlayerTeam/> }/>
+                    <Route path="/my-invities" element={ <PlayerInvites/> }/>
                     <Route path="/all-teams" element={ <TeamList/> }/>
                 </Routes>
             </div>
