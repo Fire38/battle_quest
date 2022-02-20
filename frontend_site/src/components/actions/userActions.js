@@ -7,9 +7,13 @@ export const logoutUser = () => ({ type: "LOGOUT" });
 
 export const loginError = (error) => ({ type: "ERROR", error });
 
-const getInviteListSuccess = (payload) => ({type: "GET_INVITE_LIST_SUCCESS", payload})
+export const getInviteListSuccess = (payload) => ({type: "GET_INVITE_LIST_SUCCESS", payload})
 
-const getInviteListError = (error) => ({type: "GET_INVITE_LIST_ERROR", error})
+export const getInviteListError = (error) => ({type: "GET_INVITE_LIST_ERROR", error})
+
+export const getUserTeamInfoSuccess = (payload) => ({type: "GET_USERS_TEAM_INFO_SUCCESS", payload})
+
+export const getUserTeamInfoError = (payload) => ({type: "GET_USERS_TEAM_INFO_ERROR", error})
 
 
 export const fetchUser = (userInfo) => async dispatch => {
@@ -63,12 +67,12 @@ export const autoLogin = () => async dispatch => {
 }
 
 
-export const getUserTeam = () => async dispatch => {
+export const getUserTeamInfo = () => async dispatch => {
     try{
         const res = await axiosInstance.get("/core/get_user_team/")
-        console.log(res.data)
+        dispatch(getUserTeamInfoSuccess(res.data))
     }catch(error){
-        console.log("Ошибка получения команды", error)
+        dispatch(getUserTeamInfoError(error.message))
     }
 }
 

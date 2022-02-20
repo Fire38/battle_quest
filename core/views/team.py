@@ -9,8 +9,12 @@ from core.serializers import TeamSerializer, InviteSerializer
 
 class UserTeam(APIView):
     def get(self, request):
-        print(request.user.profile.team)
-        user = User.objects.get(id=request.user.id)
+        user = CustomUser.objects.get(id=request.user.id)
+        if user.team:
+            serializer = TeamSerializer(user.team)
+            return Response(serializer.data)
+        else:
+            return Response(data={"team": False})
 
 
 class UserInvite(APIView):
@@ -30,8 +34,6 @@ class UserInvite(APIView):
             return Response()
 
 
-
-
 class TeamList(APIView):
     permission_classes = (permissions.AllowAny,)
 
@@ -41,8 +43,7 @@ class TeamList(APIView):
         return Response(serializer.data)
 
 
-
 class TeamDetail(APIView):
-    def get(self, request, pk):
+    def get(self, request):
 
         return Response

@@ -3,7 +3,8 @@ const initialState = {
     error: false,
     errorMessage: '',
     user: {},
-    invites: {}
+    invites: {},
+    teamInfo: {}
 }
 
 
@@ -34,6 +35,17 @@ export const userReducer = (state=initialState, action) => {
                 invites: action.payload
             }
         case "GET_INVITE_LIST_ERROR":
+            return{
+                ...state,
+                error: true,
+                errorMessage: action.payload
+            }
+        case "GET_USERS_TEAM_INFO_SUCCESS":
+            return{
+                ...state,
+                teamInfo: action.payload
+            }
+        case "GET_USERS_TEAM_INFO_ERROR":
             return{
                 ...state,
                 error: true,

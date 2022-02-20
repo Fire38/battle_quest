@@ -6,6 +6,7 @@ from core.serializers import TeamSerializer
 
 class UserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=6)
+    captain = serializers.BooleanField(default=False)
 
     def create(self, validated_data):
         user = CustomUser.objects.create_user(
@@ -16,4 +17,4 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = CustomUser
-        fields = ("id", "username", "password", "team")
+        fields = ("id", "username", "password", "team", "captain")

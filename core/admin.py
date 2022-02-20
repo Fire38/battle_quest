@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
-from .models import Team, InviteToTeam, CustomUser
+from .models import Team, InviteToTeam, CustomUser, Captain
 
 
 class CustomUserAdmin(UserAdmin):
@@ -29,3 +29,5 @@ class CustomUserAdmin(UserAdmin):
 admin.site.register(CustomUser, CustomUserAdmin)
 admin.site.register(Team)
 admin.site.register(InviteToTeam)
+admin.site.register(Captain)
+
