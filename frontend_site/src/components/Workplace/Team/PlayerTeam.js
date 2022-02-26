@@ -3,6 +3,11 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { getUserTeamInfo } from "../../actions/userActions";
 
+import { InviteToTeamForm } from "./TeamForms/InviteToTeamForm";
+import { RemoveFromTeamForm } from "./TeamForms/RemoveFromTeamForm";
+import { ChangeCaptainForm } from "./TeamForms/ChangeCaptainForm";
+import { ChangeTeamNameForm } from "./TeamForms/ChangeTeamNameForm";
+
 
 export const PlayerTeam = () => {
     const dispatch = useDispatch();
@@ -12,7 +17,22 @@ export const PlayerTeam = () => {
     useEffect(() => {
         dispatch(getUserTeamInfo())
     }, [])
-    console.log(teamInfo)
+
+    let teamStructure = ""
+    
+    if (teamInfo.members){
+        teamStructure = Object.values(teamInfo.members).map((member) =>
+        <li className="list-group-item" key={member.id}>
+            {member.username} 
+            {
+                member.captain 
+                ? 
+                <span className="badge rounded-pill bg-warning text-dark">К</span>
+                :
+                ""
+            }
+        </li>
+    )}
 
 
     if (teamInfo.team !== false ){
@@ -27,31 +47,21 @@ export const PlayerTeam = () => {
                     </div>
                     <div className="col-3">
                         Состав команды
+                        <ul className="list-group list-group-flush">
+                            {teamStructure}
+                        </ul>
                     </div>
                     <div className="col-4">
                     {
                         userInfo.captain  
                         ?
                         <div>
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Введите id или ник игрока" aria-label="Recipient's username" aria-describedby="button-addon2"></input>
-                                <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2">Пригласить в команду</button>
-                            </div>
+                            <InviteToTeamForm/>
+                            <RemoveFromTeamForm/>
+                            <ChangeCaptainForm/>
+                            <ChangeTeamNameForm/>
     
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Введите id или ник игрока" aria-label="Recipient's username" aria-describedby="button-addon2"></input>
-                                <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2">Выгнать из команды</button>
-                            </div>
-    
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Введите id или ник игрока" aria-label="Recipient's username" aria-describedby="button-addon2"></input>
-                                <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2">Назначить капитаном</button>
-                            </div>
-    
-                            <div className="input-group mb-3">
-                                <input type="text" className="form-control" placeholder="Введите новое название команды" aria-label="Recipient's username" aria-describedby="button-addon2"></input>
-                                <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2">Переименовать команду</button>
-                            </div>
+
                             <button className="btn btn-danger btn-sm">Распустить команду</button>
                         </div>
                         :

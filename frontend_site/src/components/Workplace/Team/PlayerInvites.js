@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
-import { getInviteList, acceptInvite } from "../../actions/userActions";
 import { useDispatch, useSelector } from "react-redux";
+
+import { getInviteList, acceptInvite } from "../../actions/userActions";
 
 
 export const PlayerInvites = () => {

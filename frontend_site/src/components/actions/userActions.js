@@ -96,3 +96,47 @@ export const acceptInvite = (teamId) => async dispatch => {
         console.log(error)
     }
 }
+
+
+export const inviteToTeam = (invitedPlayer) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/invite_to_team/", {
+            invitedPlayer: invitedPlayer
+        })
+    }catch(error){
+        console.log(error)
+    }
+}
+
+
+export const removeFromTeam = (removedPlayer) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/remove_from_team/", {
+            removedPlayer: removedPlayer
+        })
+    }catch(error){
+        console.log(error)
+    }
+}
+
+
+export const changeCaptain = (assignedPlayer) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/change_captain/", {
+            assignedPlayer: assignedPlayer
+        })
+    }catch(error){
+        console.log(error)
+    }
+}
+
+
+export const changeTeamName = (newTeamName) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/change_team_name/", {
+            newTeamName: newTeamName
+        })
+    }catch(error){
+        console.log(error)
+    }
+}
