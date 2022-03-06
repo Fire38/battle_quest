@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { getUserTeamInfo } from "../../actions/userActions";
+import { getUserTeamInfo, leaveFromTeam } from "../../actions/userActions";
 
 import { InviteToTeamForm } from "./TeamForms/InviteToTeamForm";
 import { RemoveFromTeamForm } from "./TeamForms/RemoveFromTeamForm";
@@ -12,7 +12,7 @@ import { ChangeTeamNameForm } from "./TeamForms/ChangeTeamNameForm";
 export const PlayerTeam = () => {
     const dispatch = useDispatch();
     const teamInfo = useSelector(state => state.userReducer.teamInfo)
-    const userInfo = useSelector(state => state.userReducer.user)
+    const userInfo = useSelector(state => state.userReducer)
 
     useEffect(() => {
         dispatch(getUserTeamInfo())
@@ -33,9 +33,17 @@ export const PlayerTeam = () => {
             }
         </li>
     )}
+    console.log(userInfo)
 
+    if (userInfo.error){
+        return(
+            <div>
+                {userInfo.errorMessage}
+            </div>
+        )
+    }
 
-    if (teamInfo.team !== false ){
+    if (teamInfo){
         return(
             <div className="container-fluid">
                 <div className="row">
@@ -53,27 +61,22 @@ export const PlayerTeam = () => {
                     </div>
                     <div className="col-4">
                     {
-                        userInfo.captain  
+                        userInfo.user.captain  
                         ?
                         <div>
                             <InviteToTeamForm/>
                             <RemoveFromTeamForm/>
                             <ChangeCaptainForm/>
                             <ChangeTeamNameForm/>
-    
-
-                            <button className="btn btn-danger btn-sm">Распустить команду</button>
                         </div>
                         :
-                        ""
+                        <button className="btn btn-outline-secondary btn-warning" onClick={leaveFromTeam()}>Выйти из команды</button>
                     }
                     </div>
                 </div>
-
-                   
             </div>
         )
-    } else{
+    }else{
         return(
             <div>
                 Вы не в команде, получите приглашение или создайте свою команду

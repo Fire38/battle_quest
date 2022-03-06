@@ -15,6 +15,7 @@ export const ChangeTeamNameForm = () => {
     const handleClick = (event) => {
         event.preventDefault();
         dispatch(changeTeamName(teamName))
+        setTeamName("")
     }
 
 
@@ -27,6 +28,7 @@ export const ChangeTeamNameForm = () => {
                     placeholder="Введите новое название команды" 
                     aria-label="Recipient's username" 
                     aria-describedby="button-addon2"
+                    value={teamName}
                     onChange={handleChange}/>
                 <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Переименовать команду</button>
             </div>

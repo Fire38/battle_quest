@@ -15,6 +15,7 @@ export const RemoveFromTeamForm = () => {
     const handleClick = (event) => {
         event.preventDefault();
         dispatch(removeFromTeam(removedPlayer))
+        setRemovedPlayer("")
     }
 
     return(
@@ -25,7 +26,9 @@ export const RemoveFromTeamForm = () => {
                 placeholder="Введите id или ник игрока" 
                 aria-label="Recipient's username" 
                 aria-describedby="button-addon2"
-                onChange={handleChange}/>
+                onChange={handleChange}
+                value={removedPlayer}
+            />
             <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Выгнать из команды</button>
         </div>
     )

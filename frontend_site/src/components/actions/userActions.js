@@ -13,7 +13,7 @@ export const getInviteListError = (error) => ({type: "GET_INVITE_LIST_ERROR", er
 
 export const getUserTeamInfoSuccess = (payload) => ({type: "GET_USERS_TEAM_INFO_SUCCESS", payload})
 
-export const getUserTeamInfoError = (payload) => ({type: "GET_USERS_TEAM_INFO_ERROR", error})
+export const getUserTeamInfoError = (payload) => ({type: "GET_USERS_TEAM_INFO_ERROR", payload})
 
 
 export const fetchUser = (userInfo) => async dispatch => {
@@ -71,8 +71,13 @@ export const getUserTeamInfo = () => async dispatch => {
     try{
         const res = await axiosInstance.get("/core/get_user_team/")
         dispatch(getUserTeamInfoSuccess(res.data))
+
     }catch(error){
-        dispatch(getUserTeamInfoError(error.message))
+        if (error.response.status === 400){
+            dispatch(getUserTeamInfoError("Авторизуйтесь, чтобы увидеть информацию о команде"))
+        }else if (error.response.status === 404){
+            dispatch(getUserTeamInfoError("Вы не в команде, примите приглашение или создайте свою команду"))
+        }
     }
 }
 
@@ -114,6 +119,15 @@ export const removeFromTeam = (removedPlayer) => async dispatch => {
         const res = await axiosInstance.post("/core/remove_from_team/", {
             removedPlayer: removedPlayer
         })
+    }catch(error){
+        console.log(error)
+    }
+}
+
+
+export const leaveFromTeam = () => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/leave_from_team/")
     }catch(error){
         console.log(error)
     }

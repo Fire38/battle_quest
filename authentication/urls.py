@@ -8,5 +8,4 @@ urlpatterns = [
     path("token/obtain/", views.TokenObtainPairView.as_view()),
     path("token/refresh/", views.TokenRefreshView.as_view()),
     path("get_user/", GetUser.as_view()),
-
 ]

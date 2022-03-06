@@ -15,6 +15,7 @@ export const ChangeCaptainForm = () => {
     const handleClick = (event) => {
         event.preventDefault();
         dispatch(changeCaptain(assignedPlayer))
+        setAssignedPlayer("")
     }
 
     return(
@@ -26,6 +27,7 @@ export const ChangeCaptainForm = () => {
                     placeholder="Введите id или ник игрока" 
                     aria-label="Recipient's username" 
                     aria-describedby="button-addon2"
+                    value={assignedPlayer}
                     onChange={handleChange}/>
                 <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Назначить капитаном</button>
             </div>

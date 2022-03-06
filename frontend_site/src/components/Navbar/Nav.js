@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { AuthForm } from "./authForm";
-import { logoutUser, getUserTeam } from "./../actions/userActions";
+import { logoutUser } from "./../actions/userActions";
 import  Logo  from "../../../static/img/logo.png";
 
 

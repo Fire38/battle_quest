@@ -15,6 +15,7 @@ export const InviteToTeamForm = () => {
     const handleClick = (event) => {
         event.preventDefault();
         dispatch(inviteToTeam(invitedPlayer))
+        setInvitedPlayer("")
     }
 
     return(
@@ -26,6 +27,7 @@ export const InviteToTeamForm = () => {
                     placeholder="Введите id или ник игрока" 
                     aria-label="Recipient's username" 
                     aria-describedby="button-addon2"
+                    value={invitedPlayer}
                     onChange={handleChange}/>
                 <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Пригласить в команду</button>
             </div>

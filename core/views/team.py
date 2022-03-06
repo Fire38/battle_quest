@@ -15,9 +15,9 @@ class UserTeam(APIView):
         user = CustomUser.objects.get(id=request.user.id)
         if user.team:
             serializer = TeamSerializer(user.team)
-            return Response(serializer.data)
+            return Response(serializer.data, status=status.HTTP_200_OK)
         else:
-            return Response(data={"team": False})
+            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
 class UserInvite(APIView):
@@ -80,6 +80,16 @@ class RemovePlayerFromTeam(APIView):
             except ObjectDoesNotExist:
                 return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Такого игрока не существует"})
         return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Неудачная попытка удаления"})
+
+
+class LeaveFromTeam(APIView):
+    def post(self, request):
+        user = request.user
+        if user.team:
+            user.team = None
+            user.save()
+            return Response(status=status.HTTP_200_OK, data={"message": "Игрок вышел из команды"})
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Неудачная попытка выхода"})
 
 
 class ChangeCaptain(APIView):

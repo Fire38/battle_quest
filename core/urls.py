@@ -9,5 +9,6 @@ urlpatterns = [
     path("invite_to_team/", InvitePlayerToTeam.as_view()),
     path("remove_from_team/", RemovePlayerFromTeam.as_view()),
     path("change_captain/", ChangeCaptain.as_view()),
-    path("change_team_name/", ChangeTeamName.as_view())
+    path("change_team_name/", ChangeTeamName.as_view()),
+    path("leave_from_team/", LeaveFromTeam.as_view())
 ]

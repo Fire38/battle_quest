@@ -1,7 +1,7 @@
 const initialState = {
     loggedIn: false,
     error: false,
-    errorMessage: '',
+    errorMessage: "",
     user: {},
     invites: {},
     teamInfo: {}
@@ -42,8 +42,11 @@ export const userReducer = (state=initialState, action) => {
             }
         case "GET_USERS_TEAM_INFO_SUCCESS":
             return{
+                error: false,
+                errorMessage: "",
                 ...state,
-                teamInfo: action.payload
+                teamInfo: action.payload,
+
             }
         case "GET_USERS_TEAM_INFO_ERROR":
             return{
