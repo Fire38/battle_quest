@@ -18,7 +18,6 @@ export const Nav = () => {
         dispatch(logoutUser())
     }
 
-    //dispatch(getUserTeam())
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
@@ -52,7 +51,6 @@ export const Nav = () => {
                         :
                         ""
                     }
-
                 </ul>
                 { 
                     user.loggedIn 

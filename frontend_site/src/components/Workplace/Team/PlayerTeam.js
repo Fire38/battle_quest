@@ -60,18 +60,14 @@ export const PlayerTeam = () => {
                         </ul>
                     </div>
                     <div className="col-4">
-                    {
-                        userInfo.user.captain  
-                        ?
+
                         <div>
                             <InviteToTeamForm/>
                             <RemoveFromTeamForm/>
                             <ChangeCaptainForm/>
                             <ChangeTeamNameForm/>
                         </div>
-                        :
-                        <button className="btn btn-outline-secondary btn-warning" onClick={leaveFromTeam()}>Выйти из команды</button>
-                    }
+
                     </div>
                 </div>
             </div>
