@@ -1,3 +1,3 @@
-const myConfig = {'serverUrl': 'http://127.0.0.1:8000'}
+const myConfig = {'serverUrl': 'http://192.168.88.247:8000'}
 
 export default myConfig

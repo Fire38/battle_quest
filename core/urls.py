@@ -3,8 +3,8 @@ from .views import *
 
 
 urlpatterns = [
-    path("teams/", TeamList.as_view()),
-    path("get_user_team/", UserTeam.as_view()),
+    path("teams_list/", TeamList.as_view()),
+    path("get_team/<int:teamId>/", TeamDetail.as_view()),
     path("invites/", UserInvite.as_view()),
     path("invite_to_team/", InvitePlayerToTeam.as_view()),
     path("remove_from_team/", RemovePlayerFromTeam.as_view()),

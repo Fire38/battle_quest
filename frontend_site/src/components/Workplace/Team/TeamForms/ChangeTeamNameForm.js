@@ -30,7 +30,7 @@ export const ChangeTeamNameForm = () => {
                     aria-describedby="button-addon2"
                     value={teamName}
                     onChange={handleChange}/>
-                <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Переименовать команду</button>
+                <button className="btn btn-outline-dark btn-warning" type="button" id="button-addon2" onClick={handleClick}>Переименовать команду</button>
             </div>
         </form>
     )

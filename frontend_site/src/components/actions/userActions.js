@@ -11,10 +11,6 @@ export const getInviteListSuccess = (payload) => ({type: "GET_INVITE_LIST_SUCCES
 
 export const getInviteListError = (error) => ({type: "GET_INVITE_LIST_ERROR", error})
 
-export const getUserTeamInfoSuccess = (payload) => ({type: "GET_USERS_TEAM_INFO_SUCCESS", payload})
-
-export const getUserTeamInfoError = (payload) => ({type: "GET_USERS_TEAM_INFO_ERROR", payload})
-
 
 export const fetchUser = (userInfo) => async dispatch => {
     try{
@@ -63,21 +59,6 @@ export const autoLogin = () => async dispatch => {
         dispatch(loginUser(res.data))
     }catch(error){
         console.log('auloLogin ', error)
-    }
-}
-
-
-export const getUserTeamInfo = () => async dispatch => {
-    try{
-        const res = await axiosInstance.get("/core/get_user_team/")
-        dispatch(getUserTeamInfoSuccess(res.data))
-
-    }catch(error){
-        if (error.response.status === 400){
-            dispatch(getUserTeamInfoError("Авторизуйтесь, чтобы увидеть информацию о команде"))
-        }else if (error.response.status === 404){
-            dispatch(getUserTeamInfoError("Вы не в команде, примите приглашение или создайте свою команду"))
-        }
     }
 }
 

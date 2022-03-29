@@ -29,7 +29,7 @@ export const RemoveFromTeamForm = () => {
                 onChange={handleChange}
                 value={removedPlayer}
             />
-            <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Выгнать из команды</button>
+            <button className="btn btn-outline-dark btn-warning" type="button" id="button-addon2" onClick={handleClick}>Выгнать из команды</button>
         </div>
     )
 }

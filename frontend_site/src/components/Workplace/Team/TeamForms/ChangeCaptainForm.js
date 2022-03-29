@@ -28,8 +28,9 @@ export const ChangeCaptainForm = () => {
                     aria-label="Recipient's username" 
                     aria-describedby="button-addon2"
                     value={assignedPlayer}
-                    onChange={handleChange}/>
-                <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Назначить капитаном</button>
+                    onChange={handleChange}
+                />
+                <button className="btn btn-outline-dark btn-warning" type="button" id="button-addon2" onClick={handleClick}>Назначить капитаном</button>
             </div>
         </form>
 

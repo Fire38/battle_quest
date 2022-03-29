@@ -11,7 +11,6 @@ import  Logo  from "../../../static/img/logo.png";
 export const Nav = () => {
     const user = useSelector(state => state.userReducer)
     const dispatch = useDispatch();
-
     const greeting = "Привет, " + user.user.username +"!"
 
     const handleLogout = () => {

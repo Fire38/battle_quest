@@ -1,24 +1,19 @@
-from rest_framework import status, permissions
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from django.db.models import Q
 from django.core.exceptions import ObjectDoesNotExist
+from django.db.models import Q
+from rest_framework import status, permissions
+from rest_framework.response import Response
+from rest_framework.views import APIView
 
 from core.models import CustomUser, Team, InviteToTeam, Captain
+from core.permissions import IsCaptain
 from core.serializers import TeamSerializer, InviteSerializer
 
-from core.validators import is_captain
-from core.permissions import IsCaptain
 
-
-class UserTeam(APIView):
-    def get(self, request):
-        user = CustomUser.objects.get(id=request.user.id)
-        if user.team:
-            serializer = TeamSerializer(user.team)
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+class TeamDetail(APIView):
+    def get(self, request, teamId):
+        team = Team.objects.get(id=teamId)
+        serializer = TeamSerializer(team)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 
 
 class UserInvite(APIView):
@@ -129,6 +124,9 @@ class ChangeTeamName(APIView):
 
 
 class TeamList(APIView):
+    """
+        Возвращает список всех команд
+    """
     permission_classes = (permissions.AllowAny,)
 
     def get(self, request):
@@ -136,8 +134,21 @@ class TeamList(APIView):
         serializer = TeamSerializer(teams, many=True)
         return Response(serializer.data)
 
+        return Response(status=status.HTTP_400_BAD_REQUEST)
 
-class TeamDetail(APIView):
-    def get(self, request):
 
-        return Response
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,3 +1,5 @@
+import axiosInstance from "../../axiosApi"
+
 const initialState = {
     loggedIn: false,
     error: false,
@@ -18,6 +20,8 @@ export const userReducer = (state=initialState, action) => {
             }
         case "LOGOUT":
             localStorage.clear()
+            // https://github.com/nuxt-community/auth-module/issues/57
+            axiosInstance.defaults.headers['Authorization'] = null
             return{
                 ...state,
                 loggedIn: false,
@@ -35,20 +39,6 @@ export const userReducer = (state=initialState, action) => {
                 invites: action.payload
             }
         case "GET_INVITE_LIST_ERROR":
-            return{
-                ...state,
-                error: true,
-                errorMessage: action.payload
-            }
-        case "GET_USERS_TEAM_INFO_SUCCESS":
-            return{
-                error: false,
-                errorMessage: "",
-                ...state,
-                teamInfo: action.payload,
-
-            }
-        case "GET_USERS_TEAM_INFO_ERROR":
             return{
                 ...state,
                 error: true,

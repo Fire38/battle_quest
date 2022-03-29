@@ -14,9 +14,13 @@ li.list-group-item {
 
 #navlink{
     color: gold;
-    font-weight: bold;
+
 }
 
 #navlink:hover{
     cursor: pointer;
+}
+
+#navlink.active{
+    font-weight: bold;
 }

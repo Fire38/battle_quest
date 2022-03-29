@@ -1,7 +1,8 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useSelector } from "react-redux";
+import { NavLink } from "react-router-dom";
 
-import { getUserTeamInfo, leaveFromTeam } from "../../actions/userActions";
+import { leaveFromTeam } from "../../actions/userActions";
 
 import { InviteToTeamForm } from "./TeamForms/InviteToTeamForm";
 import { RemoveFromTeamForm } from "./TeamForms/RemoveFromTeamForm";
@@ -10,18 +11,11 @@ import { ChangeTeamNameForm } from "./TeamForms/ChangeTeamNameForm";
 
 
 export const PlayerTeam = () => {
-    const dispatch = useDispatch();
-    const teamInfo = useSelector(state => state.userReducer.teamInfo)
     const userInfo = useSelector(state => state.userReducer)
-
-    useEffect(() => {
-        dispatch(getUserTeamInfo())
-    }, [])
-
     let teamStructure = ""
-    
-    if (teamInfo.members){
-        teamStructure = Object.values(teamInfo.members).map((member) =>
+
+    if (Object.keys(userInfo.user).length !== 0 && userInfo.user.team){
+        teamStructure = Object.values(userInfo.user.team.members).map((member) =>
         <li className="list-group-item" key={member.id}>
             {member.username} 
             {
@@ -33,7 +27,6 @@ export const PlayerTeam = () => {
             }
         </li>
     )}
-    console.log(userInfo)
 
     if (userInfo.error){
         return(
@@ -43,15 +36,15 @@ export const PlayerTeam = () => {
         )
     }
 
-    if (teamInfo){
+    if (userInfo.user.team){
         return(
             <div className="container-fluid">
                 <div className="row">
-                        <h3>{teamInfo.name}</h3> 
+                        <h3><b>{userInfo.user.team.name}</b></h3> 
                 </div>
                 <div className="row">
                     <div className="col-3">
-                        <img height="250px" width="250px" src={teamInfo.logo}></img>
+                        <img className="rounded" height="250px" width="250px" src={userInfo.user.team.logo}></img>
                     </div>
                     <div className="col-3">
                         Состав команды
@@ -60,14 +53,18 @@ export const PlayerTeam = () => {
                         </ul>
                     </div>
                     <div className="col-4">
-
-                        <div>
-                            <InviteToTeamForm/>
-                            <RemoveFromTeamForm/>
-                            <ChangeCaptainForm/>
-                            <ChangeTeamNameForm/>
-                        </div>
-
+                        {
+                            userInfo.user.captain
+                            ?
+                            <div>
+                                <InviteToTeamForm/>
+                                <RemoveFromTeamForm/>
+                                <ChangeCaptainForm/>
+                                <ChangeTeamNameForm/>
+                            </div>
+                            :
+                            <button className="btn btn-outline-secondary btn-warning" onClick={leaveFromTeam()}>Выйти из команды</button>
+                        }
                     </div>
                 </div>
             </div>
@@ -75,10 +72,10 @@ export const PlayerTeam = () => {
     }else{
         return(
             <div>
-                Вы не в команде, получите приглашение или создайте свою команду
+                Вы не в команде, получите приглашение или <NavLink id="navlink" to="/team/create-team/">создайте свою команду</NavLink>
             </div>
         )
     }
-
-
 }
+
+

@@ -29,7 +29,7 @@ export const InviteToTeamForm = () => {
                     aria-describedby="button-addon2"
                     value={invitedPlayer}
                     onChange={handleChange}/>
-                <button className="btn btn-outline-secondary btn-warning" type="button" id="button-addon2" onClick={handleClick}>Пригласить в команду</button>
+                <button className="btn btn-outline-dark btn-warning" type="button" id="button-addon2" onClick={handleClick}>Пригласить в команду</button>
             </div>
         </form>
 
