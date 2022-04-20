@@ -4,7 +4,7 @@ from django.contrib.auth.models import AbstractUser
 
 class Team(models.Model):
     name = models.CharField(max_length=100)
-    logo = models.ImageField(upload_to="team_images", blank=True)
+    logo = models.ImageField(upload_to="team_images", default="default_team_logo.jpg", blank=True)
 
     def __str__(self):
         return self.name

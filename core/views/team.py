@@ -16,6 +16,12 @@ class TeamDetail(APIView):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+class PlayerTeamDetail(APIView):
+    def get(self, request):
+        serializer = TeamSerializer(request.user.team)
+        return Response(serializer.data)
+
+
 class UserInvite(APIView):
     def get(self, request):
         invites = InviteToTeam.objects.filter(user=request.user)
@@ -23,7 +29,9 @@ class UserInvite(APIView):
         return Response(serializer.data)
 
     def post(self, request):
-        """ Принимаем приглашение в команду """
+        """
+        Принимаем приглашение в команду
+        """
         team = Team.objects.get(id=request.data["teamId"])
         # Проверяем наличие приглашения
         if InviteToTeam.objects.filter(user=request.user, team=team).exists():
@@ -110,22 +118,24 @@ class ChangeCaptain(APIView):
 
 
 class ChangeTeamName(APIView):
+    # Меняет название команды
+
     permission_classes = (permissions.IsAuthenticated, IsCaptain)
 
     def post(self, request):
         user = request.user
         new_team_name = request.data["newTeamName"]
-        if len(new_team_name) > 0:
+        if len(new_team_name.strip()) > 0:
             team = user.team
             team.name = new_team_name
             team.save()
-            return Response()
-        return Response()
+            return Response(status=status.HTTP_200_OK, data={"message": "Название успешно изменено"})
+        return Response(status=status.HTTP_400_BAD_REQUEST, data={"message": "Некорректное имя команды"})
 
 
 class TeamList(APIView):
     """
-        Возвращает список всех команд
+    Возвращает список всех команд
     """
     permission_classes = (permissions.AllowAny,)
 
@@ -133,8 +143,6 @@ class TeamList(APIView):
         teams = Team.objects.all()
         serializer = TeamSerializer(teams, many=True)
         return Response(serializer.data)
-
-        return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 

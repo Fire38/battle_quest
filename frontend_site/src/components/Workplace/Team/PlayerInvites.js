@@ -6,29 +6,45 @@ import { getInviteList, acceptInvite } from "../../actions/userActions";
 
 export const PlayerInvites = () => {
     const dispatch = useDispatch();
-    const loggedIn = useSelector(state => state.userReducer.loggedIn)
-    const invites = useSelector(state => state.userReducer.invites)
-    console.log(invites)
+    const user = useSelector(state => state.userReducer)
 
     useEffect(() => {
         dispatch(getInviteList())
-    }, [loggedIn])
+    }, [user.loggedIn])
+
 
     const accept = (teamId) => {
         dispatch(acceptInvite(teamId))
     }
 
-    let inviteList = Object.values(invites).map((invite) =>
-        <li className="list-group-item" key={invite.team.id}>
-            {invite.team.name}
-            <button className="btn btn-warning btn-sm" onClick={() => accept(invite.team.id)}>Вступить в команду</button>
-        </li>
-    )
+    if (user.error){
+        return(
+            <div>
+                <b>Произошла ошибка, возможно вы не авторизированы</b><br/>
+                {user.errorMessage}
+            </div>
+        )
+    }
+
+
+    let inviteList = ""
+    if (Object.values(user.invites).length > 0){
+        inviteList = Object.values(user.invites).map((invite) =>
+            <li className="list-group-item" key={invite.team.id}>
+                {invite.team.name}
+                <button className="btn btn-warning btn-sm" onClick={() => accept(invite.team.id)}>Вступить в команду</button>
+            </li>
+            )
+        }else{
+            inviteList = <div>Список приглашений пуст</div>
+        }
+
+
 
 
     return (
         <div>
-            <h3>Приглашения в команду</h3>
+            <h3 className="text-center">Приглашения в команду</h3>
             <ul className="list-group">
                 {inviteList}
             </ul>

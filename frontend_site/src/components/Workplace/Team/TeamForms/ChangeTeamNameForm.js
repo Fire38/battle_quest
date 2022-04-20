@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import { changeTeamName } from "../../../actions/userActions";
+import { changeTeamName } from "../../../actions/teamActions";
 
 
 export const ChangeTeamNameForm = () => {

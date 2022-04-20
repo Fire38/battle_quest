@@ -2,7 +2,7 @@ import React from "react";
 
 export const Profile = () => {
     return (
-        <div>
+        <div className="row">
             Тут про профиль
         </div>
     )

@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import { leaveFromTeam } from "../../actions/userActions";
@@ -9,13 +9,35 @@ import { RemoveFromTeamForm } from "./TeamForms/RemoveFromTeamForm";
 import { ChangeCaptainForm } from "./TeamForms/ChangeCaptainForm";
 import { ChangeTeamNameForm } from "./TeamForms/ChangeTeamNameForm";
 
+import { getPlayerTeam } from "../../actions/userActions";
+
 
 export const PlayerTeam = () => {
+    const dispatch = useDispatch();
     const userInfo = useSelector(state => state.userReducer)
+
+    useEffect(() => {
+        dispatch(getPlayerTeam());
+    }, [])
+
+
+    if(userInfo.error){
+        return(
+            <div>
+                <b>Произошла ошибка</b><br/>
+                {userInfo.errorMessage}
+            </div>
+        )
+    }
+
+   
+
     let teamStructure = ""
 
-    if (Object.keys(userInfo.user).length !== 0 && userInfo.user.team){
-        teamStructure = Object.values(userInfo.user.team.members).map((member) =>
+
+
+    if (Object.keys(userInfo.teamInfo).length !== 0){
+        teamStructure = Object.values(userInfo.teamInfo.members).map((member) =>
         <li className="list-group-item" key={member.id}>
             {member.username} 
             {
@@ -28,31 +50,24 @@ export const PlayerTeam = () => {
         </li>
     )}
 
-    if (userInfo.error){
-        return(
-            <div>
-                {userInfo.errorMessage}
-            </div>
-        )
-    }
 
-    if (userInfo.user.team){
+    if (userInfo.teamInfo){
         return(
             <div className="container-fluid">
-                <div className="row">
-                        <h3><b>{userInfo.user.team.name}</b></h3> 
+                <div className="row text-center">
+                    <h3><b>{userInfo.teamInfo.name}</b></h3> 
                 </div>
                 <div className="row">
-                    <div className="col-3">
-                        <img className="rounded" height="250px" width="250px" src={userInfo.user.team.logo}></img>
+                    <div className="col-xl-3 col-sm-4 text-center">
+                        <img className="rounded" height="250px" width="250px" src={userInfo.teamInfo.logo}></img>
                     </div>
-                    <div className="col-3">
-                        Состав команды
+                    <div className="col-xl-3 col-sm-3">
+                        <div className="text-center">Состав команды</div>
                         <ul className="list-group list-group-flush">
                             {teamStructure}
                         </ul>
                     </div>
-                    <div className="col-4">
+                    <div className="col-xl-4 col-sm-5">
                         {
                             userInfo.user.captain
                             ?

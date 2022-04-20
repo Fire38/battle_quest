@@ -11,6 +11,9 @@ export const getTeamInfoError = (payload) => ({type: "GET_TEAM_INFO_ERROR", payl
 
 export const resetError = (payload) => ({type: "RESET_ERROR"})
 
+export const getPlayerTeamSuccess = (payload) => ({type: "GET_PLAYER_TEAM_SUCCESS", payload})
+
+export const getPlayerTeamError = (payload) => ({type: "GET_PLAYER_TEAM_ERROR", payload})
 
 
 
@@ -38,4 +41,18 @@ export const getTeamInfo = (teamId) => async dispatch => {
     }
 }
 
+
+export const changeTeamName = (newTeamName) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/change_team_name/", {
+            newTeamName: newTeamName
+        })
+        if (res.status === 200){
+            const res = await axiosInstance.get("/core/get_player_team/")
+            dispatch(getPlayerTeamSuccess(res.data))
+        }
+    }catch(error){
+        console.log(error)
+    }
+}
 

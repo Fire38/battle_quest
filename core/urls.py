@@ -4,6 +4,7 @@ from .views import *
 
 urlpatterns = [
     path("teams_list/", TeamList.as_view()),
+    path("get_player_team/", PlayerTeamDetail.as_view()),
     path("get_team/<int:teamId>/", TeamDetail.as_view()),
     path("invites/", UserInvite.as_view()),
     path("invite_to_team/", InvitePlayerToTeam.as_view()),

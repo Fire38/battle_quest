@@ -9,7 +9,11 @@ export const loginError = (error) => ({ type: "ERROR", error });
 
 export const getInviteListSuccess = (payload) => ({type: "GET_INVITE_LIST_SUCCESS", payload})
 
-export const getInviteListError = (error) => ({type: "GET_INVITE_LIST_ERROR", error})
+export const getInviteListError = (payload) => ({type: "GET_INVITE_LIST_ERROR", payload})
+
+export const getPlayerTeamSuccess = (payload) => ({type: "GET_PLAYER_TEAM_SUCCESS", payload})
+
+export const getPlayerTeamError = (payload) => ({type: "GET_PLAYER_TEAM_ERROR", payload})
 
 
 export const fetchUser = (userInfo) => async dispatch => {
@@ -78,6 +82,9 @@ export const acceptInvite = (teamId) => async dispatch => {
         const res = await axiosInstance.post("/core/invites/", {
             teamId: teamId,
         })
+        if (res.status === 200){
+            dispatch(getInviteList())
+        }
     }catch(error){
         console.log(error)
     }
@@ -120,6 +127,11 @@ export const changeCaptain = (assignedPlayer) => async dispatch => {
         const res = await axiosInstance.post("/core/change_captain/", {
             assignedPlayer: assignedPlayer
         })
+        if (res.status === 200){
+            const res = await axiosInstance.get("/core/get_player_team/")
+            dispatch(getPlayerTeamSuccess(res.data))
+            dispatch(autoLogin());
+        }
     }catch(error){
         console.log(error)
     }
@@ -131,7 +143,21 @@ export const changeTeamName = (newTeamName) => async dispatch => {
         const res = await axiosInstance.post("/core/change_team_name/", {
             newTeamName: newTeamName
         })
+        if (res.status === 200){
+            const res = await axiosInstance.get("/core/get_player_team/")
+            dispatch(getPlayerTeamSuccess(res.data))
+        }
     }catch(error){
         console.log(error)
+    }
+}
+
+
+export const getPlayerTeam = () => async dispatch => {
+    try{
+        const res = await axiosInstance.get("/core/get_player_team/")
+        dispatch(getPlayerTeamSuccess(res.data))
+    }catch(error){
+        dispatch(getPlayerTeamError(error.message))
     }
 }

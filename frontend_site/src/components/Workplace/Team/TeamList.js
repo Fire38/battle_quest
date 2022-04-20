@@ -19,7 +19,7 @@ export const TeamList = () => {
     if (teams.error){
         return(
             <div>
-                Произошла ошибка<br/>
+                <b>Произошла ошибка</b><br/>
                 {teams.errorMessage}
             </div>
         )
@@ -28,20 +28,20 @@ export const TeamList = () => {
     let teamList = ""
     if (Object.values(teams.teamsList).length > 0){
         teamList = Object.values(teams.teamsList).map((team) => 
-        <li className="list-group-item" key={team.id}>
-            <NavLink className="nav-link font-weight-bold" to={`/team/${team.id}/`} id="navlink">
-                { team.name }
-            </NavLink>
-        </li>
-        )
+            <li className="list-group-item" key={team.id}>
+                <NavLink className="nav-link font-weight-bold" to={`/team/${team.id}/`} id="navlink">
+                    { team.name }
+                </NavLink>
+            </li>
+            )
     }else{
         teamList = <div>Список команд пуст</div>
     }
 
     
     return(
-        <div>
-            <h3>Список команд</h3>
+        <div className="row">
+            <h3 className="text-center">Список команд</h3>
             <ul className="list-group">
                 { teamList }
             </ul>

@@ -7,7 +7,7 @@ import { GamesList } from "./GamesList";
 export const GamesPage = () => {
     return (
         <div className="row">
-            <div className="col-2">
+            <div className="d-none d-xl-block col-xl-2">
                 <ul className="list-group list-group-flush">
                     <li className="list-group-item">
                         <NavLink className="nav-link font-weight-bold" to="all-games" id="navlink">
@@ -20,6 +20,25 @@ export const GamesPage = () => {
                         </NavLink>
                     </li>
                     <li className="list-group-item">
+                        <NavLink className="nav-link font-weight-bold" to="old-games" id="navlink">
+                            Прошедшие игры
+                        </NavLink>
+                    </li>
+                </ul>
+            </div>
+            <div className="d-xl-none d-sm-block col-xs-12">
+                <ul className="row list-group list-group-horizontal">
+                    <li className="col-4 list-group-item text-center">
+                        <NavLink className="nav-link font-weight-bold" to="all-games" id="navlink">
+                            Все игры
+                        </NavLink>
+                    </li>
+                    <li className="col-4 list-group-item text-center">
+                        <NavLink className="nav-link font-weight-bold" to="my-games" id="navlink">
+                            Мои игры
+                        </NavLink>
+                    </li>
+                    <li className="col-4 list-group-item text-center">
                         <NavLink className="nav-link font-weight-bold" to="old-games" id="navlink">
                             Прошедшие игры
                         </NavLink>

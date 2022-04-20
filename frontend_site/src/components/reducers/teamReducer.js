@@ -41,6 +41,18 @@ export const teamReducer = (state=initialState, action) => {
                 error: false,
                 errorMessage: ""
             }
+        case "GET_PLAYER_TEAM_SUCCESS":
+            return{
+                ...state,
+                error: false,
+                teamInfo: action.payload
+            }
+        case "GET_PLAYER_TEAM_ERROR":
+            return{
+                ...state,
+                error: true,
+                errorMessage: action.payload
+            }
         default:
             return state
     }
