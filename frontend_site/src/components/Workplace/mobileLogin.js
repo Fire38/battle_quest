@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-import { fetchUser } from "../actions/userActions";
+import { registerUser, fetchUser } from "../actions/userActions";
 
 
 export const LoginForm = () => {
@@ -27,8 +27,12 @@ export const LoginForm = () => {
         dispatch(fetchUser(user));
     }
 
+    const handleRegister = (event) => {
+        event.preventDefault();
+        dispatch(registerUser(user))
+    }
+
     if (userInfo.loggedIn){
-        console.log(userInfo.loggedIn)
         navigate("/");
     }
 
@@ -37,7 +41,7 @@ export const LoginForm = () => {
         <div>
             <input 
                 type="text" 
-                className="form-control" 
+                className="form-control mb-2" 
                 placeholder="Введите логин" 
                 aria-label="Recipient's username" 
                 aria-describedby="button-addon2"
@@ -46,14 +50,16 @@ export const LoginForm = () => {
             />
             <input 
                 type="password" 
-                className="form-control" 
+                className="form-control mb-2" 
                 placeholder="Введите пароль" 
                 aria-label="Recipient's username" 
                 aria-describedby="button-addon2"
                 name="password"
                 onChange={handleChange}
             />
-            <button className="btn btn-outline-dark btn-warning" type="submit"  onClick={handleLogin}>Войти</button>
+            <button className="btn btn-outline-dark btn-warning col-12 mb-2" type="submit"  onClick={handleLogin}>Войти</button>
+            <button className="btn btn-outline-dark btn-warning col-12" type="submit" >Зарегистрироваться</button>
+
         </div>
     )
 }

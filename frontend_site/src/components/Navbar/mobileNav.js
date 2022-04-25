@@ -6,19 +6,22 @@ import { slide as Menu } from 'react-burger-menu';
 import { logoutUser } from "../actions/userActions";
 
 
-
-
 export const MobileNav = () => {
     const [menuOpen, setMenuOpen] = useState(false);
     const user = useSelector(state => state.userReducer)
     const dispatch = useDispatch();
 
     const handleLogout = () => {
-        dispatch(logoutUser())
+        dispatch(logoutUser());
+        closeMenu();
     }
 
-    const handleStateChange = () =>{
-        setMenuOpen(menuOpen)
+    const handleStateChange = (state) =>{
+        setMenuOpen(state.isOpen)
+    }
+
+    const closeMenu = () => {
+        setMenuOpen(false)
     }
 
 
@@ -27,9 +30,9 @@ export const MobileNav = () => {
             <Menu 
                 right 
                 noOverlay
-                width={ '70%' }
+                width={ '100%' }
                 isOpen={menuOpen}
-                onStateChange={() => handleStateChange()}
+                onStateChange={(state) => handleStateChange(state)}
                 >
                 {
                     user.loggedIn
@@ -37,18 +40,18 @@ export const MobileNav = () => {
                     ""
                     :
                     <li className="nav-item text-center text-bold text-warning" onClick={handleLogout}>
-                        <NavLink to="login" className="nav-link text-bold text-warning">Войти</NavLink>
+                        <NavLink to="login" className="nav-link text-bold text-warning" onClick={() =>closeMenu()}>Вход/Регистрация</NavLink>
                     </li>
                 }
                 
                 <li className="nav-item text-center">
-                    <NavLink to="games" className="nav-link text-bold text-warning">Игры</NavLink>
+                    <NavLink to="games" className="nav-link text-bold text-warning" onClick={() =>closeMenu()}>Игры</NavLink>
                 </li>
                 <li className="nav-item text-center">
-                    <NavLink to="team" className="nav-link text-bold text-warning">Команда</NavLink>
+                    <NavLink to="team" className="nav-link text-bold text-warning" onClick={() => closeMenu()}>Команда</NavLink>
                 </li>
                 <li className="nav-item text-center">
-                    <NavLink to="profile" className="nav-link text-bold text-warning">Профиль</NavLink>
+                    <NavLink to="profile" className="nav-link text-bold text-warning" onClick={() => closeMenu()}>Профиль</NavLink>
                 </li>
                 {
                     user.loggedIn

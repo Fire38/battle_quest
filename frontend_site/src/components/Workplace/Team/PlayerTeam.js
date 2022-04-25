@@ -35,8 +35,8 @@ export const PlayerTeam = () => {
     let teamStructure = ""
 
 
-
-    if (Object.keys(userInfo.teamInfo).length !== 0){
+    console.log(userInfo)
+    if (Object.keys(userInfo.teamInfo).length !== 0 && userInfo.teamInfo.name.length !== 0){
         teamStructure = Object.values(userInfo.teamInfo.members).map((member) =>
         <li className="list-group-item" key={member.id}>
             {member.username} 
@@ -51,7 +51,7 @@ export const PlayerTeam = () => {
     )}
 
 
-    if (userInfo.teamInfo){
+    if (userInfo.teamInfo && Object.keys(userInfo.teamInfo).length !== 0){
         return(
             <div className="container-fluid">
                 <div className="row text-center">
