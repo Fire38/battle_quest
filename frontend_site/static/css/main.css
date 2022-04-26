@@ -1,13 +1,13 @@
 #app{
     color:gold;
-    height: 100vh;
+    
 }
  
 
 #workplace{
-    background-color: rgb(41, 40, 38);
-    height: 100vh;
 
+    background-color: rgb(41, 40, 38);
+    min-height: 100vh;
 }
 
 li.list-group-item {
@@ -28,8 +28,31 @@ li.list-group-item {
     font-weight: bold;
 }
 
+.btn-outline-success{
+    color: gold;
+    border: 0px;
+}
 
+.btn-outline-success:hover{
+    background-color:gold;
+    color: black
+}
 
+#controlBtn{
+    color: gold;
+    border: 0px;
+    background-color: rgb(41, 40, 38);
+}
+
+#controlBtn:hover{
+    background-color:gold;
+    color: black
+}
+
+hr{
+    color: gold;
+    background-color: gold;
+}
 
 
 

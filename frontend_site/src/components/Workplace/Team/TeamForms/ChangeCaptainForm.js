@@ -20,17 +20,17 @@ export const ChangeCaptainForm = () => {
 
     return(
         <form>
-            <div className="input-group mb-3">
+            <div className="mb-3">
                 <input 
                     type="text" 
-                    className="form-control" 
+                    className="form-control mb-1" 
                     placeholder="Введите id или ник игрока" 
                     aria-label="Recipient's username" 
                     aria-describedby="button-addon2"
                     value={assignedPlayer}
                     onChange={handleChange}
                 />
-                <button className="btn btn-outline-dark btn-warning" type="button" id="button-addon2" onClick={handleClick}>Назначить капитаном</button>
+                <button id="controlBtn" className="btn btn-outline-dark btn-warning col-12" type="button" onClick={handleClick}>Назначить капитаном</button>
             </div>
         </form>
 

@@ -73,8 +73,11 @@ export const PlayerTeam = () => {
                             ?
                             <div>
                                 <InviteToTeamForm/>
+                                <hr/>
                                 <RemoveFromTeamForm/>
+                                <hr/>
                                 <ChangeCaptainForm/>
+                                <hr/>
                                 <ChangeTeamNameForm/>
                             </div>
                             :
