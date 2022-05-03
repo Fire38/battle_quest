@@ -24,7 +24,6 @@ export const MobileNav = () => {
         setMenuOpen(false)
     }
 
-
     return(
         <div className="d-block d-sm-none" id="forHumburgerMenu">
             <Menu 
@@ -37,7 +36,7 @@ export const MobileNav = () => {
                 {
                     user.loggedIn
                     ?
-                    ""
+                    <div>Привет, {user.user.username}!</div>
                     :
                     <li className="nav-item text-center text-bold text-warning" onClick={handleLogout}>
                         <NavLink to="login" className="nav-link text-bold text-warning" onClick={() =>closeMenu()}>Вход/Регистрация</NavLink>

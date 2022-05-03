@@ -10,6 +10,7 @@ export const TeamPage = () => {
     const teamInfo = useSelector(state => state.teamReducer.teamInfo)
     let params = useParams();
 
+
     useEffect(() => {
         dispatch(getTeamInfo(params.teamId))
     }, [])
@@ -18,7 +19,7 @@ export const TeamPage = () => {
 
     if (teamInfo && teamInfo.members.length !== 0){
         teamStructure = Object.values(teamInfo.members).map((member) =>
-        <li className="list-group-item" key={member.id}>
+        <li className="list-group-item text-center" key={member.id}>
             {member.username} 
             {
                 member.captain 
@@ -36,15 +37,15 @@ export const TeamPage = () => {
     if (teamInfo){
         return(
             <div className="container-fluid">
-                <div className="row">
-                        <h3>Команда: <b>{teamInfo.name}</b></h3> 
+                <div className="row text-center">
+                        <h3><b>{teamInfo.name}</b></h3> 
                 </div>
                 <div className="row">
-                    <div className="col-3">
-                        <img height="250px" width="250px" src={teamInfo.logo}></img>
+                    <div className="col-xl-3 col-sm-4 text-center">
+                        <img className="rounded" height="250px" width="250px" src={teamInfo.logo}></img>
                     </div>
-                    <div className="col-3">
-                        <b>Состав</b>
+                    <div className="col-xl-3 col-sm-3">
+                        <div className="text-center">Состав команды</div>
                         <ul className="list-group list-group-flush">
                             { teamStructure }
                         </ul>

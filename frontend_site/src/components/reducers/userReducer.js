@@ -26,7 +26,8 @@ export const userReducer = (state=initialState, action) => {
                 ...state,
                 loggedIn: false,
                 user: {},
-                invites: {}
+                invites: {},
+                teamInfo: {}
             }
         case "ERROR":
             return{
@@ -38,7 +39,8 @@ export const userReducer = (state=initialState, action) => {
             return{
                 ...state,
                 invites: action.payload,
-                error: false
+                error: false,
+                errorMessage: ""
             }
         case "GET_INVITE_LIST_ERROR":
             return{
@@ -50,6 +52,7 @@ export const userReducer = (state=initialState, action) => {
             return{
                 ...state,
                 error: false,
+                errorMessage: "",
                 teamInfo: action.payload
             }
         case "GET_PLAYER_TEAM_ERROR":
@@ -57,6 +60,17 @@ export const userReducer = (state=initialState, action) => {
                 ...state,
                 error: true,
                 errorMessage: action.payload
+            }
+        case "LEAVE_TEAM":
+            return{
+                ...state,
+                teamInfo: {}
+            }
+        case "FAILURE_INVITE":
+            return{
+                ...state,
+                error: true,
+                errorMessage: action.error
             }
         default:
             return state

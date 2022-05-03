@@ -6,6 +6,7 @@ import { Workplace } from "./Workplace/Workplace";
 
 import { autoLogin } from "./actions/userActions";
 
+import '../../node_modules/react-toastify/dist/ReactToastify.css';
 
 export const App = () => {
     const dispatch = useDispatch();

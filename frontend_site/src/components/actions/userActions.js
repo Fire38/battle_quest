@@ -15,6 +15,9 @@ export const getPlayerTeamSuccess = (payload) => ({type: "GET_PLAYER_TEAM_SUCCES
 
 export const getPlayerTeamError = (payload) => ({type: "GET_PLAYER_TEAM_ERROR", payload})
 
+export const leaveTeam = () => ({type: "LEAVE_TEAM"})
+
+export const failureInviteRequest = (error) => ({type: "FAILURE_INVITE", error})
 
 export const fetchUser = (userInfo) => async dispatch => {
     try{
@@ -90,6 +93,21 @@ export const acceptInvite = (teamId) => async dispatch => {
     }
 }
 
+export const leaveFromTeam = () => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/leave_from_team/");
+        if (res.status === 200){
+            //console.log("отработал3")
+
+            dispatch(leaveTeam())
+            dispatch(getPlayerTeam())
+
+        }
+    }catch(error){
+        console.log(error)
+    }
+}
+
 
 export const inviteToTeam = (invitedPlayer) => async dispatch => {
     try{
@@ -97,7 +115,8 @@ export const inviteToTeam = (invitedPlayer) => async dispatch => {
             invitedPlayer: invitedPlayer
         })
     }catch(error){
-        console.log(error)
+        console.log(error.response.data)
+        dispatch(failureInviteRequest(error.response.data.message))
     }
 }
 
@@ -113,13 +132,6 @@ export const removeFromTeam = (removedPlayer) => async dispatch => {
 }
 
 
-export const leaveFromTeam = () => async dispatch => {
-    try{
-        const res = await axiosInstance.post("/core/leave_from_team/")
-    }catch(error){
-        console.log(error)
-    }
-}
 
 
 export const changeCaptain = (assignedPlayer) => async dispatch => {

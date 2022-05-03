@@ -18,24 +18,20 @@ export const PlayerTeam = () => {
 
     useEffect(() => {
         dispatch(getPlayerTeam());
-    }, [])
+    }, [userInfo.user])
 
 
     if(userInfo.error){
         return(
             <div>
                 <b>Произошла ошибка</b><br/>
-                {userInfo.errorMessage}
+                {userInfo.errorMessage}<br/>
+                Возможно вы не авторизованы или не в команде. Авторизируйтесь, получите приглашение или <NavLink id="navlink" to="/team/create-team/">создайте свою команду</NavLink>
             </div>
         )
     }
 
-   
-
     let teamStructure = ""
-
-
-    console.log(userInfo)
     if (Object.keys(userInfo.teamInfo).length !== 0 && userInfo.teamInfo.name.length !== 0){
         teamStructure = Object.values(userInfo.teamInfo.members).map((member) =>
         <li className="list-group-item" key={member.id}>
@@ -81,7 +77,7 @@ export const PlayerTeam = () => {
                                 <ChangeTeamNameForm/>
                             </div>
                             :
-                            <button className="btn btn-outline-secondary btn-warning" onClick={leaveFromTeam()}>Выйти из команды</button>
+                            <button className="btn btn-outline-secondary btn-warning" onClick={() => dispatch(leaveFromTeam())}>Выйти из команды</button>
                         }
                     </div>
                 </div>

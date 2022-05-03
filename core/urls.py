@@ -11,5 +11,6 @@ urlpatterns = [
     path("remove_from_team/", RemovePlayerFromTeam.as_view()),
     path("change_captain/", ChangeCaptain.as_view()),
     path("change_team_name/", ChangeTeamName.as_view()),
-    path("leave_from_team/", LeaveFromTeam.as_view())
+    path("leave_from_team/", LeaveFromTeam.as_view()),
+    path("create-team/", CreateTeam.as_view()),
 ]

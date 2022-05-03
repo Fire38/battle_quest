@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { registerUser, fetchUser } from "../actions/userActions";
 
@@ -14,6 +15,7 @@ export const LoginForm = () => {
     const userInfo = useSelector(state => state.userReducer)
     const navigate = useNavigate();
 
+    const notify = (text) => toast(text);
 
     const handleChange = (event) => {
         setUser({
@@ -30,12 +32,13 @@ export const LoginForm = () => {
     const handleRegister = (event) => {
         event.preventDefault();
         dispatch(registerUser(user))
+        userInfo.error ? notify(userInfo.errorMessage) : notify("Регистрация пользователя прошла успешно")
+        
     }
 
     if (userInfo.loggedIn){
         navigate("/");
     }
-
 
     return(
         <div>
@@ -58,8 +61,7 @@ export const LoginForm = () => {
                 onChange={handleChange}
             />
             <button className="btn btn-outline-dark btn-warning col-12 mb-2" type="submit"  onClick={handleLogin}>Войти</button>
-            <button className="btn btn-outline-dark btn-warning col-12" type="submit" >Зарегистрироваться</button>
-
+            <button className="btn btn-outline-dark btn-warning col-12" type="submit" onClick={handleRegister}>Зарегистрироваться</button>
         </div>
     )
 }

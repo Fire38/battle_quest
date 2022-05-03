@@ -1,5 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 import { inviteToTeam } from "../../../actions/userActions";
 
@@ -7,15 +8,20 @@ import { inviteToTeam } from "../../../actions/userActions";
 export const InviteToTeamForm = () => {
     const [invitedPlayer, setInvitedPlayer] = useState("");
     const dispatch = useDispatch();
+    const userInfo = useSelector(state => state.userReducer)
 
     const handleChange = (event) => {
         setInvitedPlayer(event.target.value)
     }   
 
+    const notify = (text) => toast(text);
+
     const handleClick = (event) => {
         event.preventDefault();
         dispatch(inviteToTeam(invitedPlayer))
         setInvitedPlayer("")
+        console.log(userInfo)
+        //userInfo.error ? notify(userInfo.errorMessage) : notify("Приглашение отправлено!")
     }
 
     return(

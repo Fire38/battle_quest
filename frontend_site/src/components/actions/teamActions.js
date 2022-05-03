@@ -1,3 +1,4 @@
+import axios from "axios";
 import axiosInstance from "../../axiosApi";
 
 
@@ -14,8 +15,6 @@ export const resetError = (payload) => ({type: "RESET_ERROR"})
 export const getPlayerTeamSuccess = (payload) => ({type: "GET_PLAYER_TEAM_SUCCESS", payload})
 
 export const getPlayerTeamError = (payload) => ({type: "GET_PLAYER_TEAM_ERROR", payload})
-
-
 
 export const getTeamList = () => async dispatch => {
     try{
@@ -56,3 +55,13 @@ export const changeTeamName = (newTeamName) => async dispatch => {
     }
 }
 
+
+export const createTeam = (teamName) => async dispatch => {
+    try{
+        const res = await axiosInstance.post("/core/create-team/", {
+            teamName: teamName
+        })
+    }catch(error){
+        console.log("Ошибка создания команды", error)
+    }
+}

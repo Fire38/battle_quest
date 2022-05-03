@@ -39,14 +39,14 @@ li.list-group-item {
 }
 
 #controlBtn{
-    color: gold;
+    color: black;
     border: 0px;
-    background-color: rgb(41, 40, 38);
+    background-color: gold;
 }
 
 #controlBtn:hover{
     background-color:gold;
-    color: black
+    color: black;
 }
 
 hr{
